@@ -1,7 +1,4 @@
 package agh.ics.oop;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringJoiner;
 
 import static agh.ics.oop.Direction.*;
 
