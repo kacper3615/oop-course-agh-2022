@@ -4,9 +4,9 @@ import static agh.ics.oop.Direction.*;
 
 public class World {
     public static void main(String[] args) {
-        System.out.print("system wystartował\n");
+        System.out.print("Start\n");
         World.run(args);
-        System.out.print("system zakończył działanie");
+        System.out.print("Stop");
     }
 
     private static Direction[] getDirection(String[] args) {
