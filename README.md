@@ -1,1 +1,2 @@
-# oop-course-agh-2022
+# Siemanko, witam w moim labie. 
+Dzisiaj zrobimy sobie obiektówkę
