@@ -1,18 +1,32 @@
 package agh.ics.oop;
 
 import static agh.ics.oop.Direction.*;
+import java.util.Arrays;
 
 public class World {
     public static void main(String[] args) {
+        //Lab 1
         System.out.print("Start\n");
         World.run(args);
         System.out.print("Stop\n");
 
+        //Lab 2
         Vector2d position1 = new Vector2d(1,2);
         System.out.println(position1);
         Vector2d position2 = new Vector2d(-2,1);
         System.out.println(position2);
         System.out.println(position1.add(position2));
+
+        //Lab 3
+        Animal animal = new Animal();
+        System.out.println(animal.toString());
+        MoveDirection[] directions = OptionsParser.parse(args);
+        System.out.println(Arrays.toString(directions));
+        for (MoveDirection argument: directions){
+            animal.move(argument);
+            System.out.println(animal);
+        }
+        System.out.println(Arrays.toString(directions));
     }
 
     private static Direction[] getDirection(String[] args) {

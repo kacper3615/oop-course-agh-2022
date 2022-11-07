@@ -82,7 +82,7 @@ public class Vector2dTest {
         assertEquals(vector_1.upperRight(vector_2), new Vector2d(1, 2));
         assertEquals(vector_2.upperRight(vector_3), new Vector2d(-5, -1));
         assertNotEquals(vector_1.upperRight(vector_3), new Vector2d(-7, 2));
-        assertEquals(vector_min.upperRight(vector_max), new Vector2d(2147483647, 2147483647));
+        assertEquals(vector_min.upperRight(vector_max), new Vector2d(MAX_INT, MAX_INT));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class Vector2dTest {
         assertEquals(vector_1.lowerLeft(vector_2), new Vector2d(-5, -3));
         assertEquals(vector_2.lowerLeft(vector_3), new Vector2d(-7, -3));
         assertNotEquals(vector_1.lowerLeft(vector_3), new Vector2d(-7, 2));
-        assertEquals(vector_min.lowerLeft(vector_max), new Vector2d(-2147483648, -2147483648));
+        assertEquals(vector_min.lowerLeft(vector_max), new Vector2d(MIN_INT, MIN_INT));
     }
 
     @Test
