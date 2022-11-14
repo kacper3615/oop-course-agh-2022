@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 
+<<<<<<< Updated upstream
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,10 +33,17 @@ public class AnimalTest {
         assertEquals(EAST, animal.getDirection());
         animal.move(MoveDirection.LEFT);
         assertEquals(NORTH, animal.getDirection());
+=======
+public class AnimalTest {
+    @Test
+    public void directionTest(){
+
+>>>>>>> Stashed changes
     }
 
     @Test
     public void moveTest(){
+<<<<<<< Updated upstream
         Animal animal = new Animal();
         assertTrue(animal.isAt(new Vector2d(2,2)));
         animal.move(MoveDirection.FORWARD);
@@ -101,4 +109,20 @@ public class AnimalTest {
         animal.move(MoveDirection.FORWARD);
         assertTrue(animal.isAt(new Vector2d(0, 0)));
     }
+=======
+
+    }
+
+    @Test
+    public void checkPositionTest(){
+
+    }
+
+    @Test
+    public void parseTest(){
+
+    }
+
+
+>>>>>>> Stashed changes
 }

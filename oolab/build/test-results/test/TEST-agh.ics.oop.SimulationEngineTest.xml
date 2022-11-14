@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agh.ics.oop.SimulationEngineTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-14T22:49:23" hostname="KACPER-KOMPUTER" time="7.866">
+  <properties/>
+  <testcase name="worldSimulationTest()" classname="agh.ics.oop.SimulationEngineTest" time="7.866"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
