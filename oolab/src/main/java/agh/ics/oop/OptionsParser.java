@@ -6,17 +6,17 @@ import java.util.Arrays;
 
 public class OptionsParser {
     public static MoveDirection[] parse(String[] args){
-        List<MoveDirection> directionlist = new ArrayList<>();
+        List<MoveDirection> direction_list = new ArrayList<>();
         for (String option: args){
             switch (option){
-                case "f", "forward" -> directionlist.add(MoveDirection.FORWARD);
-                case "b", "backward" -> directionlist.add(MoveDirection.BACKWARD);
-                case "l", "left" -> directionlist.add(MoveDirection.LEFT);
-                case "r", "right" -> directionlist.add(MoveDirection.RIGHT);
+                case "f", "forward" -> direction_list.add(MoveDirection.FORWARD);
+                case "b", "backward" -> direction_list.add(MoveDirection.BACKWARD);
+                case "l", "left" -> direction_list.add(MoveDirection.LEFT);
+                case "r", "right" -> direction_list.add(MoveDirection.RIGHT);
             }
         }
-        MoveDirection[] res = new MoveDirection[directionlist.size()];
-        directionlist.toArray(res);
+        MoveDirection[] res = new MoveDirection[direction_list.size()];
+        direction_list.toArray(res);
         return res;
     }
 }

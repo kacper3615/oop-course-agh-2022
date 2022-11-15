@@ -35,44 +35,44 @@ public class RectangularMapTest{
     @Test
     public void placeTest(){
         // given
-        RectangularMap map = new RectangularMap(6, 6);
-        Animal animal1 = new Animal(map, new Vector2d(0, 0));
-        Animal animal2 = new Animal(map, new Vector2d(6, 6));
-        Animal animal3 = new Animal(map, new Vector2d(0, 6));
-        Animal animal4 = new Animal(map, new Vector2d(6, 0));
-        Animal animal5 = new Animal(map, new Vector2d(2, 1));
-        Animal animal6 = new Animal(map, new Vector2d(2, 1));
-        Animal animal7 = new Animal();
-        Animal animal8 = new Animal();
-        Animal animal9 = new Animal(map, new Vector2d(7, 7));
+        RectangularMap map = new RectangularMap(5, 5);
+        Animal animal_1 = new Animal(map, new Vector2d(0, 0));
+        Animal animal_2 = new Animal(map, new Vector2d(5, 5));
+        Animal animal_3 = new Animal(map, new Vector2d(0, 5));
+        Animal animal_4 = new Animal(map, new Vector2d(5, 0));
+        Animal animal_5 = new Animal(map, new Vector2d(3, 3));
+        Animal animal_6 = new Animal(map, new Vector2d(3, 3));
+        Animal animal_7 = new Animal();
+        Animal animal_8 = new Animal();
+        Animal animal_9 = new Animal(map, new Vector2d(10, 10));
 
         // then
-        assertTrue(map.place(animal1));
-        assertTrue(map.place(animal2));
-        assertTrue(map.place(animal3));
-        assertTrue(map.place(animal4));
-        assertTrue(map.place(animal5));
-        assertFalse(map.place(animal6));
-        assertTrue(map.place(animal7));
-        assertFalse(map.place(animal8));
-        assertFalse(map.place(animal9));
+        assertTrue(map.place(animal_1));
+        assertTrue(map.place(animal_2));
+        assertTrue(map.place(animal_3));
+        assertTrue(map.place(animal_4));
+        assertTrue(map.place(animal_5));
+        assertFalse(map.place(animal_6));
+        assertTrue(map.place(animal_7));
+        assertFalse(map.place(animal_8));
+        assertFalse(map.place(animal_9));
     }
 
     @Test
     public void isOccupiedTest(){
         // given
         RectangularMap map = new RectangularMap(3, 3);
-        Animal animal1 = new Animal(map, new Vector2d(1, 2));
-        Animal animal2 = new Animal(map, new Vector2d(4, 3));
+        Animal animal_1 = new Animal(map, new Vector2d(2, 2));
+        Animal animal_2 = new Animal(map, new Vector2d(4, 4));
 
         // when
-        map.place(animal1);
-        map.place(animal2);
+        map.place(animal_1);
+        map.place(animal_2);
 
         // then
-        assertTrue(map.isOccupied(new Vector2d(1, 2)));
+        assertTrue(map.isOccupied(new Vector2d(2, 2)));
         assertFalse(map.isOccupied(new Vector2d(3, 3)));
-        assertFalse(map.isOccupied(new Vector2d(4, 3)));
+        assertFalse(map.isOccupied(new Vector2d(4, 34)));
     }
 
     @Test
