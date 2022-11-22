@@ -26,6 +26,10 @@ public class SimulationEngine implements IEngine{
         return animal_list;
     }
 
+    public Animal getAnimal(int n){
+        return animals.get(n);
+    }
+
     private void generateContent(JLabel label){
         label.setText("<html>" + map.toString().replaceAll("\n", "<br/>") + "</html>");
         try {

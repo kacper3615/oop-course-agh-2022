@@ -1,31 +1,25 @@
 package agh.ics.oop;
 
 import static agh.ics.oop.MapDirection.*;
-public class Animal {
+public class Animal extends AbstractWorldMapElement{
     private MapDirection orientation = NORTH;
-    private Vector2d position = new Vector2d(2, 2);
     private IWorldMap map = new RectangularMap(4,4);;
-    public Animal(){}
+    public Animal(){
+        super(new Vector2d(2, 2));
+    }
 
     public Animal(IWorldMap map) {
+        super(new Vector2d(2, 2));
         this.map = map;
     }
     public Animal(IWorldMap map, Vector2d initialPosition){
-        this.position = initialPosition;
+        super(initialPosition);
         this.map = map;
     }
     public Animal(IWorldMap map, Vector2d initialPosition, MapDirection direction){
-        this.position = initialPosition;
+        super(initialPosition);
         this.orientation = direction;
         this.map = map;
-    }
-
-    public boolean isAt(Vector2d position){
-        return this.position.equals(position);
-    }
-
-    public Vector2d getPosition() {
-        return position;
     }
 
     public MapDirection getDirection() {return orientation;}
@@ -40,6 +34,12 @@ public class Animal {
             case RIGHT -> this.orientation = orientation.next();
             case FORWARD -> new_position = new_position.add(orientation.toUnitVector());
             case BACKWARD -> new_position = new_position.subtract(orientation.toUnitVector());
+        }
+        if (this.map.isOccupied(new_position)){
+            Object object = this.map.objectAt(new_position);
+            if (object instanceof Grass){
+                this.map.removeObject(object);
+            }
         }
         if (this.map.canMoveTo(new_position)) {
             this.position = new_position;
