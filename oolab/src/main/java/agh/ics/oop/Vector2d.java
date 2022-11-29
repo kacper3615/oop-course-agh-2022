@@ -55,7 +55,8 @@ public class Vector2d {
         }else if(getClass() != other.getClass()){
             return false;
         }
-        return x == ((Vector2d) other).x && y == ((Vector2d) other).y;
+        Vector2d other_vector = (Vector2d) other;
+        return other_vector.hashCode() == this.hashCode();
     }
 
     @Override

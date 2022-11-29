@@ -1,7 +1,8 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class GrassField extends AbstractWorldMap{
     private int no_of_grass;
@@ -15,23 +16,21 @@ public class GrassField extends AbstractWorldMap{
         this.grass_list = this.createFields(no_of_grass);
     }
 
-    public List<Grass> createFields(int n){
-        List<Grass> positions = new ArrayList<>();
+    public Map<Vector2d, Grass> createFields(int n){
+        Map<Vector2d, Grass> positions = new HashMap<>();
         for (int i=0; i<n; i++){
             Vector2d pos = randomField();
             while (isGrassAt(pos, positions)){
                 pos = randomField();
             }
-            positions.add(new Grass(pos));
+            positions.put(pos, new Grass(pos));
         }
         return positions;
     }
 
-    public boolean isGrassAt(Vector2d pos, List<Grass> grass_list){
+    public boolean isGrassAt(Vector2d pos, Map<Vector2d, Grass> grass_list){
         if(grass_list == null) return false;
-        for (Grass position : grass_list){
-            if(position.getPosition().equals(pos)) return true;
-        }
+        if(grass_list.containsKey(pos)) return true;
         return false;
     }
 
@@ -49,37 +48,47 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public void removeObject(Object object){
-        if (object instanceof Animal){
-            this.animals.remove(object);
-        } else if (object instanceof Grass) {
-            this.grass_list.remove(object);
+        super.removeObject(object);
+        if (object instanceof Grass) {
+            this.grass_list.remove(((Grass) object).position);
             Vector2d position = randomField();
             while (isOccupied(position)){
                 position = randomField();
             }
-            grass_list.add(new Grass(position));
+            grass_list.put(position, new Grass(position));
         }
     }
 
     @Override
-    public Vector2d getLowerLeft(){
-        Vector2d v = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        for (Animal animal : animals) {
-            v = v.lowerLeft(animal.getPosition());
+    public Object objectAt(Vector2d position) {
+        if (animals.containsKey(position)) {
+            return animals.get(position);
         }
-        for (Grass grass : grass_list) {
-            v = v.lowerLeft(grass.getPosition());
+        if (grass_list.containsKey(position)) {
+            return grass_list.get(position);
+        }
+        return null;
+    }
+
+    @Override
+    public Vector2d getLowerLeft(){
+        Vector2d v = new Vector2d(0, 0);
+        for (Map.Entry<Vector2d, Animal> animal : animals.entrySet()) {
+            v = v.lowerLeft(animal.getValue().getPosition());
+        }
+        for (Map.Entry<Vector2d, Grass> grass : grass_list.entrySet()) {
+            v = v.lowerLeft(grass.getValue().getPosition());
         }
         return v;
     }
     @Override
     public Vector2d getUpperRight(){
         Vector2d v = new Vector2d(0, 0);
-        for (Animal animal : animals) {
-            v = v.upperRight(animal.getPosition());
+        for (Map.Entry<Vector2d, Animal> animal : animals.entrySet()) {
+            v = v.upperRight(animal.getValue().getPosition());
         }
-        for (Grass grass : grass_list) {
-            v = v.upperRight(grass.getPosition());
+        for (Map.Entry<Vector2d, Grass> grass : grass_list.entrySet()) {
+            v = v.upperRight(grass.getValue().getPosition());
         }
         return v;
     }

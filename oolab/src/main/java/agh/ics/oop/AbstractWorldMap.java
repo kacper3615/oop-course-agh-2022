@@ -1,11 +1,11 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class AbstractWorldMap implements IWorldMap{
-    protected List<Animal> animals = new ArrayList<>();
-    protected List<Grass> grass_list = new ArrayList<>();
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
+    protected Map<Vector2d, Animal> animals = new HashMap<>();
+    protected Map<Vector2d, Grass> grass_list = new HashMap<>();
     protected Vector2d lower_left = new Vector2d(0,0);
     protected Vector2d upper_right;
 
@@ -26,36 +26,40 @@ public abstract class AbstractWorldMap implements IWorldMap{
     }
 
     @Override
+    public void positionChanged(Vector2d old_position, Vector2d new_position) {
+        Animal animal = animals.get(old_position);
+        animals.put(new_position, animal);
+        animals.remove(old_position, animal);
+    }
+    @Override
     public boolean place(Animal animal){
-        if(this.canMoveTo(animal.getPosition())){
-            animals.add(animal);
-            return true;
+        Vector2d current_position = animal.getPosition();
+        if (!canMoveTo(current_position)) {
+            return false;
         }
-        return false;
+        animals.put(current_position, animal);
+        return true;
+    }
+
+    @Override
+    public void removeObject(Object object){
+        if (object instanceof Animal){
+            this.animals.remove(((Animal) object).position);
+        }
     }
 
     @Override
     public boolean isOccupied(Vector2d position){
-        for(Animal animal : this.animals){
-            if(animal.getPosition().equals(position))
-                return true;
-        }
-        for(Grass grass : this.grass_list){
-            if(grass.getPosition().equals(position))
-                return true;
-        }
-        return false;
+        return objectAt(position) != null;
     }
 
     @Override
-    public Object objectAt(Vector2d position){
-        for (Animal animal : this.animals){
-            if(animal.getPosition().equals((position)))
-                return animal;
+    public Object objectAt(Vector2d position) {
+        if (animals.containsKey(position)) {
+            return animals.get(position);
         }
-        for(Grass grass : this.grass_list){
-            if(grass.getPosition().equals(position))
-                return grass;
+        if (grass_list.containsKey(position)) {
+            return grass_list.get(position);
         }
         return null;
     }

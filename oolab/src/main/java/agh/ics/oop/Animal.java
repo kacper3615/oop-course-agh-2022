@@ -1,16 +1,20 @@
 package agh.ics.oop;
 
 import static agh.ics.oop.MapDirection.*;
+import java.util.ArrayList;
+import java.util.List;
 public class Animal extends AbstractWorldMapElement{
     private MapDirection orientation = NORTH;
     private IWorldMap map = new RectangularMap(4,4);;
     public Animal(){
         super(new Vector2d(2, 2));
     }
+    private List<IPositionChangeObserver> observer_list = new ArrayList<>();
 
     public Animal(IWorldMap map) {
         super(new Vector2d(2, 2));
         this.map = map;
+        addObserver((IPositionChangeObserver) map);
     }
     public Animal(IWorldMap map, Vector2d initialPosition){
         super(initialPosition);
@@ -20,6 +24,7 @@ public class Animal extends AbstractWorldMapElement{
         super(initialPosition);
         this.orientation = direction;
         this.map = map;
+        addObserver((IPositionChangeObserver) map);
     }
 
     public MapDirection getDirection() {return orientation;}
@@ -42,10 +47,23 @@ public class Animal extends AbstractWorldMapElement{
             }
         }
         if (this.map.canMoveTo(new_position)) {
+            positionChanged(position, new_position);
             this.position = new_position;
         }
     };
 
+    private void positionChanged(Vector2d old_position, Vector2d new_position) {
+        for (IPositionChangeObserver observer : observer_list) {
+            observer.positionChanged(old_position, new_position);
+        }
+    }
+    void addObserver(IPositionChangeObserver observer) {
+        this.observer_list.add(observer);
+    }
+
+    void removeObserver(IPositionChangeObserver observer) {
+        this.observer_list.remove(observer);
+    }
     @Override
     public String toString(){
         return switch(this.orientation) {

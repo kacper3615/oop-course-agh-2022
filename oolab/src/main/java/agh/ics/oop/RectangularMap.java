@@ -1,7 +1,5 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-
 public class RectangularMap extends AbstractWorldMap{
     private MapVisualizer visualizer = new MapVisualizer(this);
     RectangularMap(int width, int height){
@@ -14,17 +12,9 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
     @Override
-    public void removeObject(Object object){
-        if (object instanceof Animal){
-            this.animals.remove(object);
-        }
-    }
-
-    @Override
     public Object objectAt(Vector2d position){
-        for (Animal animal : this.animals){
-            if(animal.getPosition().equals((position)))
-                return animal;
+        if (animals.containsKey(position)) {
+            return animals.get(position);
         }
         return null;
     }

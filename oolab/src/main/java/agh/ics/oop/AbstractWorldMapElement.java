@@ -7,9 +7,10 @@ public class AbstractWorldMapElement {
         this.position = position;
     }
 
-    public boolean isAt(Vector2d pos){
-        return this.position.equals(pos);
+    public boolean isAt(Vector2d position){
+        return this.position.equals(position);
     }
+
     public Vector2d getPosition(){
         return this.position;
     }

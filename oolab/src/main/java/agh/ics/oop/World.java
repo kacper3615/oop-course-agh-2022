@@ -36,7 +36,7 @@ public class World {
 //        engine.run();
 //    }
 
-        //Lab 5
+        //Lab 5, 6
         MoveDirection[] directions = new OptionsParser().parse(args);
         IWorldMap map = new GrassField(10);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };

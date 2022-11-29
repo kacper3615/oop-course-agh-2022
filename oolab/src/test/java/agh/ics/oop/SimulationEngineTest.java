@@ -45,7 +45,6 @@ public class SimulationEngineTest {
         assertEquals(engine.animals.get(0).getPosition(), new Vector2d(0, 3));
         assertEquals(engine.animals.get(0).getDirection(), MapDirection.WEST);
         assertEquals(engine.animals.get(1).getPosition(), new Vector2d(10, 3));
-        assertEquals(engine.animals.get(1).getPosition(), new Vector2d(10, 5));
         assertEquals(engine.animals.get(1).getDirection(), MapDirection.EAST);
     }
 }
