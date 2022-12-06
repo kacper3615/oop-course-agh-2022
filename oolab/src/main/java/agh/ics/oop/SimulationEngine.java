@@ -51,14 +51,14 @@ public class SimulationEngine implements IEngine{
 
     @Override
     public void run() {
-        JLabel label = generateLabel();
-        SimulationFrame frame = new SimulationFrame();
-        frame.add(label);
+//        JLabel label = generateLabel();
+//        SimulationFrame frame = new SimulationFrame();
+//        frame.add(label);
 
-        generateContent(label);
+//        generateContent(label);
         for (int i = 0; i < this.moves.length; i++){
             this.animals.get(i % animals.size()).move(this.moves[i]);
-            generateContent(label);
+//            generateContent(label);
         }
     }
 }

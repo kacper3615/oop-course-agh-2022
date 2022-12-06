@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,10 +42,7 @@ public class RectangularMapTest{
         Animal animal_3 = new Animal(map, new Vector2d(0, 5));
         Animal animal_4 = new Animal(map, new Vector2d(5, 0));
         Animal animal_5 = new Animal(map, new Vector2d(3, 3));
-        Animal animal_6 = new Animal(map, new Vector2d(3, 3));
-        Animal animal_7 = new Animal();
-        Animal animal_8 = new Animal();
-        Animal animal_9 = new Animal(map, new Vector2d(10, 10));
+        Animal animal_6 = new Animal();
 
         // then
         assertTrue(map.place(animal_1));
@@ -52,10 +50,21 @@ public class RectangularMapTest{
         assertTrue(map.place(animal_3));
         assertTrue(map.place(animal_4));
         assertTrue(map.place(animal_5));
-        assertFalse(map.place(animal_6));
-        assertTrue(map.place(animal_7));
-        assertFalse(map.place(animal_8));
-        assertFalse(map.place(animal_9));
+        assertTrue(map.place(animal_6));
+    }
+
+    @Test
+    public void placeExceptionTest(){
+        IllegalArgumentException exeption = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        RectangularMap map = new RectangularMap(5, 5);
+        Animal animal_1 = new Animal(map, new Vector2d(0, 0));
+        Animal animal_2 = new Animal(map, new Vector2d(0, 0));
+
+
+        assertTrue(map.place(animal_1));
+        assertTrue(map.place(animal_2));
+        });
+        Assertions.assertEquals("(0,0) is not legal move specification.", exeption.getMessage());
     }
 
     @Test
@@ -63,7 +72,7 @@ public class RectangularMapTest{
         // given
         RectangularMap map = new RectangularMap(3, 3);
         Animal animal_1 = new Animal(map, new Vector2d(2, 2));
-        Animal animal_2 = new Animal(map, new Vector2d(4, 4));
+        Animal animal_2 = new Animal(map, new Vector2d(3, 3));
 
         // when
         map.place(animal_1);
@@ -71,7 +80,7 @@ public class RectangularMapTest{
 
         // then
         assertTrue(map.isOccupied(new Vector2d(2, 2)));
-        assertFalse(map.isOccupied(new Vector2d(3, 3)));
+        assertTrue(map.isOccupied(new Vector2d(3, 3)));
         assertFalse(map.isOccupied(new Vector2d(4, 34)));
     }
 

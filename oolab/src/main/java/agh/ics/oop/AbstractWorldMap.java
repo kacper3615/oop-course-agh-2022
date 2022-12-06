@@ -18,6 +18,15 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         this.upper_right = upper_right;
     }
 
+    public Map<Vector2d, Grass> getGrass(){
+        return this.grass_list;
+    }
+
+    public Map<Vector2d, Animal> getAnimals(){
+        return this.animals;
+    }
+
+
     @Override
     public boolean canMoveTo(Vector2d position){
         return position.follows(lower_left) &&
@@ -35,7 +44,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     public boolean place(Animal animal){
         Vector2d current_position = animal.getPosition();
         if (!canMoveTo(current_position)) {
-            return false;
+            throw new IllegalArgumentException(current_position + " is not legal move specification.");
         }
         animals.put(current_position, animal);
         return true;

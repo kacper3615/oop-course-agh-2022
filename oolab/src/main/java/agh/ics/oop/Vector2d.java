@@ -11,6 +11,13 @@ public class Vector2d {
         this.y = y;
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
     public boolean precedes(Vector2d other){
         return x <= other.x && y <= other.y;
     }
